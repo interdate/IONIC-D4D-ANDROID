@@ -1,0 +1,30 @@
+page-inbox {
+  .message {
+    min-height: 50px;
+  }
+  .gray-bg {
+    background: #ccc
+  }
+  .usr_img {
+    width: 90px;
+    height: 90px;
+  }
+  .counter {
+    clear: both;
+    margin-top: 30px;
+    font-size: 16px;
+    left: auto;
+    right: 20px;
+  }
+  ion-card {
+    position: relative;
+  }
+  .paying {
+    color: #fc5b04;
+    position: absolute;
+    font-size: 21px;
+    left: 9px;
+    top: 4px;
+    z-index: 999;
+  }
+}

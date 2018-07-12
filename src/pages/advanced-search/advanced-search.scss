@@ -1,0 +1,17 @@
+page-advanced-search {
+    .text-input-md { margin-right: 0; margin-left: 0 }
+    ion-select, select-alertless {
+        max-width: 45%;
+    }
+
+    .memb-photo {
+        font-size: 1.6rem;
+        border-bottom: 1px solid #dedede;
+        padding: 0 0 7px;
+        margin-top: 18px;
+    }
+    .memb-photo ion-checkbox {
+        float: right;
+    }
+
+}

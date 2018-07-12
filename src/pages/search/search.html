@@ -1,0 +1,68 @@
+<!--
+  Generated template for the Search page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+    <ion-navbar>
+        <ion-title>edit-profile</ion-title>
+    </ion-navbar>
+    <!--<ion-title><button></button><ion-icon name="arrow-round-back"></ion-icon></button></ion-title>-->
+</ion-header>
+
+<ion-content padding>
+    <ion-item>
+        <ion-label>Country</ion-label>
+        <select-alertless item-content (ionChange)="festSelected()" name="area"
+                          [(ngModel)]="form?.form?.country.value">
+            <ion-option value="{{country.countryCode}}" *ngFor="let country of countries">{{country.countryName}}
+            </ion-option>
+        </select-alertless>
+    </ion-item>
+    <ion-item>
+        <ion-label>{{form.form.region.label}}</ion-label>
+        <select-alertless item-content name="area" [(ngModel)]="form?.form?.region.value">
+            <ion-option value="{{region.regionCode}}" *ngFor="let region of regions">{{region.regionName}}
+            </ion-option>
+        </select-alertless>
+    </ion-item>
+    <ion-item class="border-top">
+        <ion-label class="age-label" item-left>Age</ion-label>
+        <ion-badge color="danger" item-left>{{ ageLower }}</ion-badge>
+        <ion-badge color="danger" item-right>{{ ageUpper }}</ion-badge>
+        <ion-range [(ngModel)]="default_range" (ionChange)="getAgeValues($event)" dualKnobs="true" pin="true" min="18"
+                   max="80" color="danger">
+            <ion-label range-left>From</ion-label>
+            <ion-label range-right>To</ion-label>
+        </ion-range>
+    </ion-item>
+    <ion-item>
+        <ion-label>Disability</ion-label>
+        <select-alertless item-content name="area" [(ngModel)]="form?.form?.disability.value">
+            <ion-option value="{{disability.healthId}}" *ngFor="let disability of disabilities">{{disability.healthName}}
+            </ion-option>
+        </select-alertless>
+    </ion-item>
+    <ion-item>
+        <ion-input [(ngModel)]="form?.form.username.value" placeholder="Nickname:" type="text"></ion-input>
+    </ion-item>
+    <ion-item>
+        <button full color="danger" (click)="toSearchResultsPage('search-form-1')" class="search-1" ion-button>
+            Search
+        </button>
+    </ion-item>
+    <ion-item>
+        <button full color="danger" (click)="toAdvancedSearch()" ion-button>
+            Go To Advanced Search
+        </button>
+    </ion-item>
+</ion-content>
+<ion-footer>
+
+    <ion-navbar class="footerMenu">
+        <ion-title></ion-title>
+    </ion-navbar>
+
+</ion-footer>

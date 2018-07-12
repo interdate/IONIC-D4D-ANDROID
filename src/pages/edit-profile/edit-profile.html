@@ -1,0 +1,484 @@
+<!--
+  Generated template for the EditProfile page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+    <ion-navbar>
+        <ion-title>edit-profile</ion-title>
+    </ion-navbar>
+    <!--<ion-title><button></button><ion-icon name="arrow-round-back"></ion-icon></button></ion-title>-->
+</ion-header>
+
+<button ion-button icon-only color="danger">
+    <ion-icon name="arrow-round-back"></ion-icon>
+</button>
+
+<ion-content>
+    <div class="inner_form_top">
+        <ul>
+            <li [ngClass]="{'active': form.step.value == 1 }" (click)="getPage(1)"><span
+                    class="fnumber profileSpan">1</span><span class="ftext"></span></li>
+            <li [ngClass]="{'active': form.step.value == 2 }" (click)="getPage(2)"><span
+                    class="fnumber profileSpan">2</span></li>
+            <li><span class="fnumber profileSpan" (click)="changePhotosPage()">3</span></li>
+        </ul>
+        <div class="clr"></div>
+    </div>
+    <ion-list *ngIf="form.step.value == 1">
+        <div class="input text">
+            <div [ngClass]="{'yellow-bg':  error.userEmail }"
+                 class="placeholder">{{form.userEmail.label}}
+            </div>
+            <ion-item>
+                <ion-input type="text" [(ngModel)]="form.userEmail.value"></ion-input>
+            </ion-item>
+            <div class="err">{{error.userEmail}}</div>
+        </div>
+
+
+        <div class="input text">
+            <div [ngClass]="{'yellow-bg':  error.userNick }"
+                 class="placeholder">{{form.userNick.label}}
+            </div>
+            <ion-item>
+                <ion-input type="text" [(ngModel)]="form.userNick.value">
+                </ion-input>
+            </ion-item>
+            <div class="err">{{error.userNick}}</div>
+        </div>
+
+        <div class="input">
+            <div [ngClass]="{'yellow-bg':  error.userGender }" class="placeholder">{{form.userGender.label}}
+            </div>
+            <ion-item>
+                <select-alertless item-content interface="action-sheet" [(ngModel)]="form.userGender.value">
+                    <ion-option *ngFor="let gender of form.userGender.choices" value="{{gender.value}}">
+                        {{gender.label}}
+                    </ion-option>
+                </select-alertless>
+            </ion-item>
+            <div class="err">{{error.userGender}}</div>
+        </div>
+
+        <div class="input">
+            <div [ngClass]="{'yellow-bg':  error.sexPrefId }" class="placeholder">{{form.sexPrefId.label}}
+            </div>
+            <ion-item>
+                <select-alertless item-content interface="action-sheet" [(ngModel)]="form.sexPrefId.value">
+                    <ion-option value="{{sexPreference.value}}" *ngFor="let sexPreference of form.sexPrefId.choices">
+                        {{sexPreference.label}}
+                    </ion-option>
+                </select-alertless>
+            </ion-item>
+            <div class="err">{{error.sexPrefId}}</div>
+        </div>
+
+        <div class="input text">
+            <div [ngClass]="{'yellow-bg':  error.userBirthday }" class="placeholder">{{form.userBirthday.label}}</div>
+            <ion-item>
+                <ion-datetime [(ngModel)]="birth" displayFormat="MMM DD YYYY" max="1999"
+                              pickerFormat="MM DD YYYY"></ion-datetime>
+            </ion-item>
+            <div class="err">{{error.userBirthday}}</div>
+        </div>
+
+        <div class="input">
+            <div [ngClass]="{'yellow-bg':  error.countryCode }" class="placeholder">{{form.countryCode.label}}
+            </div>
+            <ion-item>
+                <select-alertless item-content interface="action-sheet" [(ngModel)]="form.countryCode.value"
+                                  (ionChange)="festSelected()">
+                    <ion-option value="{{country.value}}" *ngFor="let country of form.countryCode.choices">
+                        {{country.label}}
+                    </ion-option>
+                </select-alertless>
+            </ion-item>
+            <div *ngIf="error.countryCode" class="err">{{error.countryCode}}</div>
+        </div>
+        <div *ngIf="form.regionCode && form.regionCode.label" class="input">
+            <div [ngClass]="{'yellow-bg':  error.regionCode }" class="placeholder">{{form.regionCode.label}}
+            </div>
+            <ion-item>
+                <select-alertless item-content interface="action-sheet" [(ngModel)]="form.regionCode.value">
+
+                    <ion-option value="{{region.value}}" *ngFor="let region of form.regionCode.choices">{{region.label}}
+                    </ion-option>
+                </select-alertless>
+            </ion-item>
+            <div *ngIf="error.regionCode" class="err">{{error.regionCode}}</div>
+        </div>
+        <div *ngIf="form.zipCode && form.zipCode.label" class="input text">
+            <div [ngClass]="{'yellow-bg':  error.zipCode }"
+                 class="placeholder">{{form.zipCode.label}}
+            </div>
+            <ion-item>
+                <ion-input type="text" [(ngModel)]="form.zipCode.value"></ion-input>
+            </ion-item>
+            <div *ngIf="error.zipCode" class="err">{{error.zipCode}}</div>
+        </div>
+        <div *ngIf="form.userCityName && form.userCityName.label" class="input text">
+            <div [ngClass]="{'yellow-bg':  error.userCityName }"
+                 class="placeholder">{{form.userCityName.label}}
+            </div>
+            <ion-item>
+                <ion-input type="text" [(ngModel)]="form.userCityName.value"></ion-input>
+            </ion-item>
+            <div *ngIf="error.userCityName" class="err">{{error.userCityName}}</div>
+        </div>
+        <div class="input">
+            <div [ngClass]="{'yellow-bg':  error.countryOfOriginCode }" class="placeholder">
+                {{form.countryOfOriginCode.label}}
+            </div>
+            <ion-item>
+                <select-alertless item-content interface="action-sheet" [(ngModel)]="form.countryOfOriginCode.value">
+                    <ion-option value="{{countryOfOriginCode.value}}"
+                                *ngFor="let countryOfOriginCode of form.countryOfOriginCode.choices">
+                        {{countryOfOriginCode.label}}
+                    </ion-option>
+                </select-alertless>
+            </ion-item>
+            <div *ngIf="error.countryOfOriginCode" class="err">{{error.countryOfOriginCode}}</div>
+        </div>
+
+
+    </ion-list>
+
+    <!----------------------- STEP 2 -------------------------------->
+
+    <ion-list *ngIf="form.step.value == 2">
+        <div class="input text">
+            <div [ngClass]="{'yellow-bg':  error.userfName }"
+                 class="placeholder">{{form.userfName.label}}
+            </div>
+            <ion-item>
+                <ion-input type="text" [(ngModel)]="form.userfName.value"></ion-input>
+            </ion-item>
+            <div class="err">{{error.userfName}}</div>
+        </div>
+        <div class="input text">
+            <div [ngClass]="{'yellow-bg':  error.userlName }"
+                 class="placeholder">{{form.userlName.label}}
+            </div>
+            <ion-item>
+                <ion-input type="text" [(ngModel)]="form.userlName.value"></ion-input>
+            </ion-item>
+            <div class="err">{{error.userlName}}</div>
+        </div>
+        <div class="input">
+            <div [ngClass]="{'yellow-bg':  error.maritalStatusId }" class="placeholder">{{form.maritalStatusId.label}}
+            </div>
+            <ion-item>
+                <select-alertless item-content interface="action-sheet" [(ngModel)]="form.maritalStatusId.value">
+                    <ion-option value="{{maritalStatusId.value}}"
+                                *ngFor="let maritalStatusId of form.maritalStatusId.choices">
+                        {{maritalStatusId.label}}
+                    </ion-option>
+                </select-alertless>
+            </ion-item>
+            <div *ngIf="error.maritalStatusId" class="err">{{error.maritalStatusId}}</div>
+        </div>
+        <div class="input">
+            <div [ngClass]="{'yellow-bg':  error.userChildren }" class="placeholder">{{form.userChildren.label}}
+            </div>
+            <ion-item>
+                <select-alertless item-content interface="action-sheet" [(ngModel)]="form.userChildren.value">
+                    <ion-option value="{{userChildren.value}}" *ngFor="let userChildren of form.userChildren.choices">
+                        {{userChildren.label}}
+                    </ion-option>
+                </select-alertless>
+            </ion-item>
+            <div *ngIf="error.userChildren" class="err">{{error.userChildren}}</div>
+        </div>
+        <div class="input">
+            <div [ngClass]="{'yellow-bg':  error.ethnicOriginId }" class="placeholder">{{form.ethnicOriginId.label}}
+            </div>
+            <ion-item>
+                <select-alertless item-content interface="action-sheet" [(ngModel)]="form.ethnicOriginId.value">
+                    <ion-option value="{{ethnicOriginId.value}}"
+                                *ngFor="let ethnicOriginId of form.ethnicOriginId.choices">
+                        {{ethnicOriginId.label}}
+                    </ion-option>
+                </select-alertless>
+            </ion-item>
+            <div *ngIf="error.ethnicOriginId" class="err">{{error.ethnicOriginId}}</div>
+        </div>
+        <div class="input">
+            <div [ngClass]="{'yellow-bg':  error.religionId }" class="placeholder">{{form.religionId.label}}
+            </div>
+            <ion-item>
+                <select-alertless item-content interface="action-sheet" [(ngModel)]="form.religionId.value">
+                    <ion-option value="{{religionId.value}}" *ngFor="let religionId of form.religionId.choices">
+                        {{religionId.label}}
+                    </ion-option>
+                </select-alertless>
+            </ion-item>
+            <div *ngIf="error.religionId" class="err">{{error.religionId}}</div>
+        </div>
+        <div class="input">
+            <div [ngClass]="{'yellow-bg':  error.educationId }" class="placeholder">{{form.educationId.label}}
+            </div>
+            <ion-item>
+                <select-alertless item-content interface="action-sheet" [(ngModel)]="form.educationId.value">
+                    <ion-option value="{{educationId.value}}" *ngFor="let educationId of form.educationId.choices">
+                        {{educationId.label}}
+                    </ion-option>
+                </select-alertless>
+            </ion-item>
+            <div *ngIf="error.educationId" class="err">{{error.educationId}}</div>
+        </div>
+        <div class="input">
+            <div [ngClass]="{'yellow-bg':  error.occupationId }" class="placeholder">{{form.occupationId.label}}
+            </div>
+            <ion-item>
+                <select-alertless item-content interface="action-sheet" [(ngModel)]="form.occupationId.value">
+                    <ion-option value="{{occupationId.value}}" *ngFor="let occupationId of form.occupationId.choices">
+                        {{occupationId.label}}
+                    </ion-option>
+                </select-alertless>
+            </ion-item>
+            <div *ngIf="error.occupationId" class="err">{{error.occupationId}}</div>
+        </div>
+        <div class="input">
+            <div [ngClass]="{'yellow-bg':  error.incomeId }" class="placeholder">{{form.incomeId.label}}
+            </div>
+            <ion-item>
+                <select-alertless item-content interface="action-sheet" [(ngModel)]="form.incomeId.value">
+                    <ion-option value="{{incomeId.value}}" *ngFor="let incomeId of form.incomeId.choices">
+                        {{incomeId.label}}
+                    </ion-option>
+                </select-alertless>
+            </ion-item>
+            <div *ngIf="error.incomeId" class="err">{{error.incomeId}}</div>
+        </div>
+        <div class="input">
+            <div [ngClass]="{'yellow-bg':  error.languageId }" class="placeholder">{{form.languageId.label}}
+            </div>
+            <ion-item>
+                <ion-select item-content interface="action-sheet" multiple="true" [(ngModel)]="form.languageId.value">
+                    <ion-option value="{{languageId.value}}" *ngFor="let languageId of form.languageId.choices">
+                        {{languageId.label}}
+                    </ion-option>
+                </ion-select>
+            </ion-item>
+            <div *ngIf="error.languageId" class="err">{{error.languageId}}</div>
+        </div>
+        <div class="input">
+            <div [ngClass]="{'yellow-bg':  error.appearanceId }" class="placeholder">{{form.appearanceId.label}}
+            </div>
+            <ion-item>
+                <select-alertless item-content interface="action-sheet" [(ngModel)]="form.appearanceId.value">
+                    <ion-option value="{{appearanceId.value}}" *ngFor="let appearanceId of form.appearanceId.choices">
+                        {{appearanceId.label}}
+                    </ion-option>
+                </select-alertless>
+            </ion-item>
+            <div *ngIf="error.appearanceId" class="err">{{error.appearanceId}}</div>
+        </div>
+        <div class="input">
+            <div [ngClass]="{'yellow-bg':  error.bodyTypeId }" class="placeholder">{{form.bodyTypeId.label}}
+            </div>
+            <ion-item>
+                <select-alertless item-content interface="action-sheet" [(ngModel)]="form.bodyTypeId.value">
+                    <ion-option value="{{bodyTypeId.value}}" *ngFor="let bodyTypeId of form.bodyTypeId.choices">
+                        {{bodyTypeId.label}}
+                    </ion-option>
+                </select-alertless>
+            </ion-item>
+            <div *ngIf="error.bodyTypeId" class="err">{{error.bodyTypeId}}</div>
+        </div>
+        <div class="input">
+            <div [ngClass]="{'yellow-bg':  error.userHight }" class="placeholder">{{form.userHight.label}}
+            </div>
+            <ion-item>
+                <select-alertless item-content interface="action-sheet" [(ngModel)]="form.userHight.value">
+                    <ion-option value="{{userHight.value}}" *ngFor="let userHight of form.userHight.choices">
+                        {{userHight.label}}
+                    </ion-option>
+                </select-alertless>
+            </ion-item>
+            <div *ngIf="error.userHight" class="err">{{error.userHight}}</div>
+        </div>
+        <div class="input">
+            <div [ngClass]="{'yellow-bg':  error.userWeight }" class="placeholder">{{form.userWeight.label}}
+            </div>
+            <ion-item>
+                <select-alertless item-content interface="action-sheet" [(ngModel)]="form.userWeight.value">
+                    <ion-option value="{{userWeight.value}}" *ngFor="let userWeight of form.userWeight.choices">
+                        {{userWeight.label}}
+                    </ion-option>
+                </select-alertless>
+            </ion-item>
+            <div *ngIf="error.userWeight" class="err">{{error.userWeight}}</div>
+        </div>
+        <div class="input">
+            <div [ngClass]="{'yellow-bg':  error.hairLengthId }" class="placeholder">{{form.hairLengthId.label}}
+            </div>
+            <ion-item>
+                <select-alertless item-content interface="action-sheet" [(ngModel)]="form.hairLengthId.value">
+                    <ion-option value="{{hairLengthId.value}}" *ngFor="let hairLengthId of form.hairLengthId.choices">
+                        {{hairLengthId.label}}
+                    </ion-option>
+                </select-alertless>
+            </ion-item>
+            <div *ngIf="error.hairLengthId" class="err">{{error.hairLengthId}}</div>
+        </div>
+        <div class="input">
+            <div [ngClass]="{'yellow-bg':  error.hairColorId }" class="placeholder">{{form.hairColorId.label}}
+            </div>
+            <ion-item>
+                <select-alertless item-content interface="action-sheet" [(ngModel)]="form.hairColorId.value">
+                    <ion-option value="{{hairColorId.value}}" *ngFor="let hairColorId of form.hairColorId.choices">
+                        {{hairColorId.label}}
+                    </ion-option>
+                </select-alertless>
+            </ion-item>
+            <div *ngIf="error.hairColorId" class="err">{{error.hairColorId}}</div>
+        </div>
+        <div class="input">
+            <div [ngClass]="{'yellow-bg':  error.eyesColorId }" class="placeholder">{{form.eyesColorId.label}}
+            </div>
+            <ion-item>
+                <select-alertless item-content interface="action-sheet" [(ngModel)]="form.eyesColorId.value">
+                    <ion-option value="{{eyesColorId.value}}" *ngFor="let eyesColorId of form.eyesColorId.choices">
+                        {{eyesColorId.label}}
+                    </ion-option>
+                </select-alertless>
+            </ion-item>
+            <div *ngIf="error.eyesColorId" class="err">{{error.eyesColorId}}</div>
+        </div>
+        <div class="input">
+            <div [ngClass]="{'yellow-bg':  error.smokingId }" class="placeholder">{{form.smokingId.label}}
+            </div>
+            <ion-item>
+                <select-alertless item-content interface="action-sheet" [(ngModel)]="form.smokingId.value">
+                    <ion-option value="{{smokingId.value}}" *ngFor="let smokingId of form.smokingId.choices">
+                        {{smokingId.label}}
+                    </ion-option>
+                </select-alertless>
+            </ion-item>
+            <div *ngIf="error.smokingId" class="err">{{error.smokingId}}</div>
+        </div>
+        <div class="input">
+            <div [ngClass]="{'yellow-bg':  error.drinkingId }" class="placeholder">{{form.drinkingId.label}}
+            </div>
+            <ion-item>
+                <select-alertless item-content interface="action-sheet" [(ngModel)]="form.drinkingId.value">
+                    <ion-option value="{{drinkingId.value}}" *ngFor="let drinkingId of form.drinkingId.choices">
+                        {{drinkingId.label}}
+                    </ion-option>
+                </select-alertless>
+            </ion-item>
+            <div *ngIf="error.drinkingId" class="err">{{error.drinkingId}}</div>
+        </div>
+
+        <div class="input text">
+            <div [ngClass]="{'yellow-bg':  error.userHobbies }"
+                 class="placeholder">{{form.userHobbies.label}}
+            </div>
+            <ion-item>
+                <ion-input type="text" [(ngModel)]="form.userHobbies.value"></ion-input>
+            </ion-item>
+            <div class="err">{{error.userHobbies}}</div>
+        </div>
+        <div class="input">
+            <div [ngClass]="{'yellow-bg':  error.userAboutMe }" class="placeholder"
+                 [innerHTML]="form.userAboutMe.label"></div>
+            <ion-item>
+                <ion-textarea [(ngModel)]="form.userAboutMe.value" rows="8">{{ form.userAboutMe.value }}</ion-textarea>
+            </ion-item>
+            <div *ngIf="error.userAboutMe" class="err">{{error.userAboutMe}}</div>
+        </div>
+
+        <div class="input">
+            <div [ngClass]="{'yellow-bg':  error.userLookingFor }" class="placeholder"
+                 [innerHTML]="form.userLookingFor.label"></div>
+            <ion-item>
+                <ion-textarea [(ngModel)]="form.userLookingFor.value" rows="8">{{ form.userLookingFor.value }}
+                </ion-textarea>
+            </ion-item>
+            <div *ngIf="error.userLookingFor" class="err">{{error.userLookingFor}}</div>
+        </div>
+
+        <div class="input">
+            <div [ngClass]="{'yellow-bg':  error.hobbyIds }" class="placeholder">{{form.hobbyIds.label}}
+            </div>
+            <ion-item>
+                <ion-select multiple="true" item-content interface="action-sheet" [(ngModel)]="form.hobbyIds.value">
+                    <ion-option value="{{hobbyIds.value}}" *ngFor="let hobbyIds of form.hobbyIds.choices">
+                        {{hobbyIds.label}}
+                    </ion-option>
+                </ion-select>
+            </ion-item>
+            <div *ngIf="error.hobbyIds" class="err">{{error.hobbyIds}}</div>
+        </div>
+
+        <div class="input">
+            <div [ngClass]="{'yellow-bg':  error.characteristicIds }" class="placeholder">
+                {{form.characteristicIds.label}}
+            </div>
+            <ion-item>
+                <ion-select item-content interface="action-sheet" [(ngModel)]="form.characteristicIds.value"
+                            multiple="true">
+                    <ion-option value="{{characteristicIds.value}}"
+                                *ngFor="let characteristicIds of form.characteristicIds.choices">
+                        {{characteristicIds.label}}
+                    </ion-option>
+                </ion-select>
+            </ion-item>
+            <div *ngIf="error.characteristicIds" class="err">{{error.characteristicIds}}</div>
+        </div>
+        <div class="input">
+            <div [ngClass]="{'yellow-bg':  error.lookingForIds }" class="placeholder">{{form.lookingForIds.label}}
+            </div>
+            <ion-item>
+                <ion-select item-content interface="action-sheet" [(ngModel)]="form.lookingForIds.value"
+                            multiple="true">
+                    <ion-option value="{{lookingForIds.value}}"
+                                *ngFor="let lookingForIds of form.lookingForIds.choices">
+                        {{lookingForIds.label}}
+                    </ion-option>
+                </ion-select>
+            </ion-item>
+            <div *ngIf="error.lookingForIds" class="err">{{error.lookingForIds}}</div>
+        </div>
+        <div class="input">
+            <div [ngClass]="{'yellow-bg':  error.healthId }" class="placeholder">{{form.healthId.label}}
+            </div>
+            <ion-item>
+                <select-alertless item-content interface="action-sheet" [(ngModel)]="form.healthId.value">
+                    <ion-option value="{{healthId.value}}" *ngFor="let healthId of form.healthId.choices">
+                        {{healthId.label}}
+                    </ion-option>
+                </select-alertless>
+            </ion-item>
+            <div *ngIf="error.healthId" class="err">{{error.healthId}}</div>
+        </div>
+        <div class="input">
+            <div [ngClass]="{'yellow-bg':  error.mobilityId }" class="placeholder">{{form.mobilityId.label}}
+            </div>
+            <ion-item>
+                <select-alertless item-content interface="action-sheet" [(ngModel)]="form.mobilityId.value">
+                    <ion-option value="{{mobilityId.value}}" *ngFor="let mobilityId of form.mobilityId.choices">
+                        {{mobilityId.label}}
+                    </ion-option>
+                </select-alertless>
+            </ion-item>
+            <div *ngIf="error.mobilityId" class="err">{{error.mobilityId}}</div>
+        </div>
+    </ion-list>
+    <div class="err">{{texts.errText}}</div>
+    <ion-item>
+        <button right color="danger" (click)="formSubmit(form)" full ion-button>Next Step
+        </button>
+    </ion-item>
+</ion-content>
+<ion-footer>
+
+    <ion-navbar class="footerMenu">
+        <ion-title></ion-title>
+    </ion-navbar>
+
+</ion-footer>
