@@ -15,7 +15,7 @@ export class ApiQuery {
     username: any;
     password: any;
     storageRes: any;
-    version: any = '1.2.0';
+    version: any = '1.1.8';
     signupData: {  username: any, password: any };
     loading: any;
 
@@ -24,7 +24,7 @@ export class ApiQuery {
                 public loadingCtrl: LoadingController,
                 public toastCtrl: ToastController,
                 public http: Http) {
-       // this.url = 'http://localhost:8101';
+       //this.url = 'http://localhost:8100';
         this.url = 'http://m.dating4disabled.com/api/v7';
         this.storage.get('user_id').then((val) => {
             this.storage.get('username').then((username) => {

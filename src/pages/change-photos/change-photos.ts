@@ -88,7 +88,6 @@ export class ChangePhotosPage {
         confirm.present();
     }
 
-
     getCount(num) {
         return parseInt(num) + 1;
     }
